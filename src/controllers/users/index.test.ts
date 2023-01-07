@@ -1,8 +1,9 @@
 import 'mocha';
 import { expect } from 'chai';
 import { agent as request } from 'supertest';
-import { getRepository, Connection, Repository } from 'typeorm';
+import { Connection, Repository } from 'typeorm';
 
+import { AppDataSource } from 'orm/data-sources/data-source';
 import { dbCreateConnection } from 'orm/dbCreateConnection';
 import { Role } from 'orm/entities/users/types';
 import { User } from 'orm/entities/users/User';
@@ -34,7 +35,7 @@ describe('Users', () => {
 
   before(async () => {
     dbConnection = await dbCreateConnection();
-    userRepository = getRepository(User);
+    userRepository = AppDataSource.getRepository(User);
   });
 
   beforeEach(async () => {
@@ -73,7 +74,7 @@ describe('Users', () => {
 
   describe('GET /v1/auth/users//:id([0-9]+)', () => {
     it('should get user', async () => {
-      const user = await userRepository.findOne({ email: adminUser.email });
+      const user = await userRepository.findOneBy({ email: adminUser.email });
       const res = await request(app).get(`/v1/users/${user.id}`).set('Authorization', adminUserToken);
       expect(res.status).to.equal(200);
       expect(res.body.message).to.equal('User found');

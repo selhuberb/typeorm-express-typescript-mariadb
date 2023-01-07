@@ -1,8 +1,9 @@
 import 'mocha';
 import { expect } from 'chai';
 import { agent as request } from 'supertest';
-import { getRepository, Connection, Repository } from 'typeorm';
+import { Connection, Repository } from 'typeorm';
 
+import { AppDataSource } from 'orm/data-sources/data-source';
 import { dbCreateConnection } from 'orm/dbCreateConnection';
 import { User } from 'orm/entities/users/User';
 
@@ -20,13 +21,15 @@ describe('Register', () => {
 
   before(async () => {
     dbConnection = await dbCreateConnection();
-    userRepository = getRepository(User);
+    userRepository = AppDataSource.getRepository(User);
   });
 
   it('should register a new user', async () => {
-    const res = await request(app)
-      .post('/v1/auth/register')
-      .send({ email: user.email, password: userPassword, passwordConfirm: userPassword });
+    const res = await request(app).post('/v1/auth/register').send({
+      email: user.email,
+      password: userPassword,
+      passwordConfirm: userPassword,
+    });
     expect(res.status).to.equal(200);
     expect(res.body.message).to.equal('User successfully created.');
     expect(res.body.data).to.be.an('null');
@@ -34,12 +37,16 @@ describe('Register', () => {
   });
 
   it('should report error when email already exists', async () => {
-    let res = await request(app)
-      .post('/v1/auth/register')
-      .send({ email: user.email, password: userPassword, passwordConfirm: userPassword });
-    res = await request(app)
-      .post('/v1/auth/register')
-      .send({ email: user.email, password: userPassword, passwordConfirm: userPassword });
+    let res = await request(app).post('/v1/auth/register').send({
+      email: user.email,
+      password: userPassword,
+      passwordConfirm: userPassword,
+    });
+    res = await request(app).post('/v1/auth/register').send({
+      email: user.email,
+      password: userPassword,
+      passwordConfirm: userPassword,
+    });
     expect(res.status).to.equal(400);
     expect(res.body.errorType).to.equal('General');
     expect(res.body.errorMessage).to.equal('User already exists');

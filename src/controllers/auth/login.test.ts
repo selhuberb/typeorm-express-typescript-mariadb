@@ -1,8 +1,9 @@
 import 'mocha';
 import { expect } from 'chai';
 import { agent as request } from 'supertest';
-import { getRepository, Connection, Repository } from 'typeorm';
+import { Connection, Repository } from 'typeorm';
 
+import { AppDataSource } from 'orm/data-sources/data-source';
 import { dbCreateConnection } from 'orm/dbCreateConnection';
 import { Role } from 'orm/entities/users/types';
 import { User } from 'orm/entities/users/User';
@@ -24,7 +25,7 @@ describe('Login', () => {
 
   before(async () => {
     dbConnection = await dbCreateConnection();
-    userRepository = getRepository(User);
+    userRepository = AppDataSource.getRepository(User);
   });
 
   beforeEach(async () => {
