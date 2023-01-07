@@ -1,4 +1,4 @@
-#  TypeORM / Express / TypeScript RESTful API boilerplate
+# TypeORM / Express / TypeScript RESTful API boilerplate
 
 [![CI][build-badge]][build-url]
 [![TypeScript][typescript-badge]][typescript-url]
@@ -31,11 +31,11 @@ Visit [localhost:4000](http://localhost:4000/) or if using Postman grab [config]
 
 Containers created:
 
-- Postgres database container seeded with 💊 Breaking Bad characters in `Users` table (default credentials `user=walter`, `password=white` in [.env file](./.env))
+- MariaDB database container seeded with 💊 Breaking Bad characters in `Users` table (default credentials `user=walter`, `password=white` in [.env file](./.env))
 - Node (v16 Alpine) container with running boilerplate RESTful API service
 - and one Node container instance to run tests locally or in CI
 
-## Features:
+## Features
 
 - [Express](https://github.com/expressjs/express) framework
 - [TypeScript v4](https://github.com/microsoft/TypeScript) codebase
@@ -44,9 +44,9 @@ Containers created:
   - Easily start local development using [Docker Compose](https://docs.docker.com/compose/) with single command `npm run docker:dev`
   - Connect to different staging or production environments `npm run docker:[stage|prod]`
   - Ready for **microservices** development and deployment.  
-    Once API changes are made, just build and push new docker image with your favourite CI/CD tool  
-    `docker build -t <username>/api-boilerplate:latest .`  
-    `docker push <username>/api-boilerplate:latest`
+     Once API changes are made, just build and push new docker image with your favourite CI/CD tool  
+     `docker build -t <username>/api-boilerplate:latest .`  
+     `docker push <username>/api-boilerplate:latest`
   - Run unit, integration (or setup with your frontend E2E) tests as `docker exec -ti be_boilerplate_test sh` and `npm run test`
 - Contract first REST API design:
   - never break API again with HTTP responses and requests payloads using [type definitions](./src/types/express/index.d.ts)
@@ -60,9 +60,9 @@ Containers created:
 - Git hooks with [Husky](https://github.com/typicode/husky) and [lint-staged](https://github.com/okonet/lint-staged)
 - Automated npm & Docker dependency updates with [Renovate](https://github.com/renovatebot/renovate) (set to patch version only)
 - Commit messages must meet [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) format.  
-  After staging changes just run `npm run commit` and get instant feedback on your commit message formatting and be prompted for required fields by [Commitizen](https://github.com/commitizen/cz-cli)
+   After staging changes just run `npm run commit` and get instant feedback on your commit message formatting and be prompted for required fields by [Commitizen](https://github.com/commitizen/cz-cli)
 
-## Other awesome boilerplates:
+## Other awesome boilerplates
 
 Each boilerplate comes with it's own flavor of libraries and setup, check out others:
 
