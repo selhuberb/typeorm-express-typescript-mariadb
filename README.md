@@ -77,3 +77,19 @@ Each boilerplate comes with it's own flavor of libraries and setup, check out ot
 ## Contributing
 
 All contributions are welcome!
+
+## Hint for git ignored files
+
+Config files have been ignored from git index to not track any further changes
+
+```bash
+git update-index --assume-unchanged .env
+git update-index --assume-unchanged config/
+```
+
+To revert simply use
+
+```bash
+git update-index --no-assume-unchanged .env
+git update-index --no-assume-unchanged config/
+```
