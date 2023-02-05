@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { DataSourceOptions } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
-const config: DataSourceOptions = {
+export const config: DataSourceOptions = {
   type: 'mariadb',
   host: process.env.DB_HOST,
   port: Number(process.env.DB_PORT),
@@ -11,10 +11,10 @@ const config: DataSourceOptions = {
   database: process.env.DB_NAME,
   synchronize: false,
   logging: false,
-  entities: ['src/orm/entities/**/*.ts'],
-  migrations: ['src/orm/migrations/**/*.ts'],
-  subscribers: ['src/orm/subscriber/**/*.ts'],
+  entities: ['src/orm/entities/**/*.js'],
+  migrations: ['src/orm/migrations/**/*.js'],
+  subscribers: ['src/orm/subscriber/**/*.js'],
   namingStrategy: new SnakeNamingStrategy(),
 };
 
-export = config;
+export default config;

@@ -11,9 +11,9 @@ const configSeed: DataSourceOptions = {
   database: process.env.DB_NAME,
   synchronize: false,
   logging: false,
-  entities: ['src/orm/entities/**/*.ts'],
-  migrations: ['src/orm/seeds/**/*.ts'],
+  entities: ['src/orm/entities/**/*.js'],
+  migrations: ['src/orm/seeds/**/*.js'],
   namingStrategy: new SnakeNamingStrategy(),
 };
 
-export = configSeed;
+export default configSeed;
