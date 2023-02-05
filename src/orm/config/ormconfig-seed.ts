@@ -1,4 +1,6 @@
 import 'dotenv/config';
+import path from 'path';
+
 import { DataSourceOptions } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
@@ -11,8 +13,8 @@ const configSeed: DataSourceOptions = {
   database: process.env.DB_NAME,
   synchronize: false,
   logging: false,
-  entities: ['src/orm/entities/**/*.js'],
-  migrations: ['src/orm/seeds/**/*.js'],
+  entities: [path.join(__dirname, '..', 'entities', '**', '*.*')],
+  migrations: [path.join(__dirname, '..', 'migrations', '**', '*.*')],
   namingStrategy: new SnakeNamingStrategy(),
 };
 
