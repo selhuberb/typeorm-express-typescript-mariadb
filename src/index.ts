@@ -8,6 +8,7 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import favicon from 'serve-favicon';
 
 import './utils/response/customSuccess';
 import { errorHandler } from './middleware/errorHandler';
@@ -21,6 +22,7 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(getLanguage);
+app.use(favicon(path.join('misc', 'icons8-bookmark-16.png')));
 
 try {
   const accessLogStream = fs.createWriteStream(path.join(__dirname, '../log/access.log'), {
